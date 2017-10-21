@@ -1,7 +1,6 @@
 const express = require('express');
 const next = require('next');
 const cors = require('cors');
-const uuid = require('uuid');
 
 const bodyParser = require('body-parser');
 const dev = process.env.NODE_ENV !== 'production';
@@ -12,12 +11,6 @@ const handler = app.getRequestHandler();
 app.prepare().then(() => {
 
   const server = express();
-  // generate new token middleware
-  server.use(function (req, res, next) {
-    const token = uuid(); // request token from server mock
-    res.set('X-CURATIO-TOKEN', token);
-    next();
-  });
 
   server.use(cors());
   server.use(bodyParser.urlencoded({ extended: true }));
